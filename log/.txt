@@ -1,0 +1,5 @@
+CMySocketClient-> 客户端socket创建成功
+CMySocketClient-> 服务器连接成功！
+CMySocketClient-> my_recv --> start recv server_datasize = 227 receive_length = 0
+CMySocketClient-> my_recv : result_recv = 2 strlen(server_buff) = 2
+CMySocketClient-> my_recv : serverdata is OK 

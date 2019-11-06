@@ -22,9 +22,11 @@ int main()
 	CMySocketClient* sockettest = new CMySocketClient();
 	
 	while (!sockettest->create_socket()) {
+		sleep(1);
 		continue;
 	}
 	while (!sockettest->my_connect(MYSERVERIP, MYPROT)) {
+		sleep(1);
 		continue;
 	}
 	while (true)

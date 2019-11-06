@@ -499,6 +499,30 @@ const char* CAmazingPacManAi::get_next_godirection()
 	maxposition_number = get_current_max_weight(maxposition, &max_weight);
 	tmpmax_weight = next_position_states[maxposition[0]].around_weight;
 	switch(maxposition_number){
+
+		case 0:
+		case 1:
+			if (max_weight == 0 ) { //|| current_position_states[maxposition[0]].dangerous <= 2) {
+				get_current_position(current_position);
+				previous_location[0] = walked_position_list.position_list[walked_position_list.current_number-1][0];
+				previous_location[1] = walked_position_list.position_list[walked_position_list.current_number-1][1];
+				move_back[0] = previous_location[0] - current_position[0];
+				move_back[1] = previous_location[1] - current_position[1];
+				if (up[0] == move_back[0] && up[1] == move_back[1]) {
+					maxposition[0] = go_up;
+				}
+				if (down[0] == move_back[0] && down[1] == move_back[1]) {
+					maxposition[0] = go_down;
+				}
+				if (right[0] == move_back[0] && right[1] == move_back[1]) {
+					maxposition[0] = go_right;
+				}
+				if (left[0] == move_back[0] && left[1] == move_back[1]) {
+					maxposition[0] = go_left;
+				}
+			}
+			break;
+
 		case 2:
 			for (i=0; i<2; i++) {
 				if (tmpmax_weight < next_position_states[maxposition[i]].around_weight) {
@@ -531,7 +555,7 @@ const char* CAmazingPacManAi::get_next_godirection()
 	std::cout << "------action_list : " << walked_position_list.position_list[walked_position_list.current_number-1][0] << ","  << walked_position_list.position_list[walked_position_list.current_number-1][1] << std::endl;
 //	std::cout << "      --------    GO_W size = " << sizeof(GO_W) << " , strlen(GO_W) = " << strlen(GO_W) << std::endl;
 	//如果四周都是０那么进行回退
-	if (max_weight == 0 ) { //|| current_position_states[maxposition[0]].dangerous <= 2) {
+/*	if (max_weight == 0 ) { //|| current_position_states[maxposition[0]].dangerous <= 2) {
 		get_current_position(current_position);
 		previous_location[0] = walked_position_list.position_list[walked_position_list.current_number-1][0];
 		previous_location[1] = walked_position_list.position_list[walked_position_list.current_number-1][1];
@@ -550,7 +574,7 @@ const char* CAmazingPacManAi::get_next_godirection()
 			maxposition[0] = go_left;
 		}
 	}
-
+*/
 	//如果距离幽灵小于等于２格子，进行规避
 	isdangerous = avoid_ghost(&avoid_direction);
 	if (isdangerous) {
